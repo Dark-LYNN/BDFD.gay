@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --link: #FF47FF;
+    --primary-color: #a7c3ff;
+    --primary-darker-color: #7F023F;
+    --primary-lighter-color: #FF66BA;
+    --primary-light-color: #DCA2D7;
+    --primary-lightest-color: #F9F2F8;
+
+    --secondary-color: #605E60;
+    --secondary-color-80: #605E6080;
+    --secondary-color-60: #605E6060;
+    --secondary-color-50: #605E6050;
+    --secondary-color-30: #605E6030;
+    --secondary-color-10: #605E6010;
+    --secondary-darker-color: #1A1A1A;
+    --secondary-lighter-color: #8E878A;
+    --secondary-light-color: #BAAEB3;
+    --secondary-lightest-color: #E5DADF;
+
+    --white-color: #FFFFFF;
+    --black-color: #000000;
+    --background-color: #333333;
+}
+
+body { 
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+body, html {
+    background-color: var(--background-color);
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100vh
+}
+
+hr {
+    margin: 1rem 0 .75rem!important
+}
+
+/* Quick CSS */
+.uppercased {
+    text-transform: uppercase
+}
+
+.inline-link {
+    color: var(--link)
+}
+
+.inline-link:hover {
+    color: var(--primary-lighter-color)!important
+}
+
+.no-margin {
+    margin: 0!important
+}
+
+.no-pad-top {
+    padding-top: 0!important
+}
+
+.no-pad-left {
+    padding-left: 0!important
+}
+
+.no-pad-right {
+    padding-right: 0!important
+}
+
+.no-pad-bottom {
+    padding-bottom: 0!important
+}
+
+.no-margin-top {
+    margin-top: 0!important
+}
+
+.no-margin-left {
+    margin-left: 0!important
+}
+
+.no-margin-right {
+    margin-right: 0!important
+}
+
+.no-margin-bottom {
+    margin-bottom: 0!important
+}
+
+.hidden {
+    display: none
+}
+
+.no-padding {
+    padding: 0!important
+}
+
+li::marker {
+    color: #fff
+}
+
+.text-center {
+    text-align: center
+}
+
+.color-white {
+    color: var(--white-color);
+}
+/* Quick CSS (mobile) */
+.columns.is-mobile>.column.is-narrow {
+    flex: unset
+}
+
+/* Error Handling */
+.redirect-error-text {
+    color: #fff;
+    font-size: 60px
+}
+.redirect-error-link {
+    font-size: 25px
+}

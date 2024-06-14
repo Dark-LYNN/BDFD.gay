@@ -1,0 +1,41 @@
+[
+    {
+        "developer": [
+            {
+                "userID": 390515191819010058,
+                "name": "kubastick",
+                "username": "kubastick",
+                "image": "https://cdn.discordapp.com/avatars/390515191819010058/223b5a30c03c41562492da815990ea43.webp"
+            },
+            {
+                "userID":154148273307910144,
+                "name": "MineBartekSA" ,
+                "username":"minebarteksa"   ,
+                "image": "https://cdn.discordapp.com/avatars/154148273307910144/2cf8dd7b18fd4289835cb5a7fa5eaed3.webp"
+            },
+            {
+                "userID": 246604909451935745,
+                "name": "_noit",
+                "username":"_noit",
+                "image": "https://cdn.discordapp.com/avatars/246604909451935745/2fceaa8d48441117a0df8e6e74b561ea.webp"
+            }
+        ],
+        "communityManager": [
+            {
+                "userID": 160417451694096384,
+                "name": "Circl3s",
+                "username": "circl3s",
+                "image":"https://cdn.discordapp.com/avatars/160417451694096384/cb049bb5049b54edf2b35b00bc8c8851.webp"
+            }
+        ],
+        "member": [
+            {
+                "userID": 392609934744748032,
+                "name": "Brd",
+                "username": ".brd.",
+                "image":"https://cdn.discordapp.com/avatars/392609934744748032/0fd112987b88cb14f864e857de3621f7.webp"
+            }
+        ]
+
+    }
+]

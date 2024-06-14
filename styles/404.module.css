@@ -1,0 +1,37 @@
+.button {
+    border: none;
+    background-color: #EF0770 !important;
+    padding: 9px 30px;
+    color: #fff;
+    border-radius: 20px;
+    transition: all .3s;
+    cursor: pointer;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.img {
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.body {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 0px;
+}
+.transfer {
+    transform: translatex(12%);
+}
