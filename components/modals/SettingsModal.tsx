@@ -1,7 +1,8 @@
 // @/components/modals/SettingsModal.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '@/styles/settingsModal.module.css';
 import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -10,26 +11,23 @@ interface SettingsModalProps {
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
-  const [isStaff, setIsStaff] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [message, setMessage] = useState<string>(''); // Ensure useState is properly defined
+  const [loading, setLoading] = useState<boolean>(false); // Ensure useState is properly defined
 
-  // Retrieve setting from localStorage if it exists
+  const addUserToMembers = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/add-member');
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage('Error adding user to members');
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // Check if the user is a staff member
-  useEffect(() => {
-    const checkStaff = async () => {
-      if (session) {
-        const res = await fetch('/api/check-member');
-        const data = await res.json();
-        setIsStaff(data.isStaff);
-        setLoading(false);
-      }
-    };
-
-    checkStaff();
-  }, [session]);
-
-  if (!isOpen) return null;
+  if (!isOpen) return null; // Ensure the modal is only rendered when open
 
   return (
     <div className={styles.modalOverlay}>
@@ -42,9 +40,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
           <label className={styles.Lable_title}>General Settings</label>
           <div>
             {/* Add the button here */}
-            <button disabled={loading || isStaff}>
-              {isStaff ? 'You are already a staff member' : 'Apply to become a staff member'}
+            <button onClick={addUserToMembers} disabled={loading}>
+              {loading ? 'Adding...' : 'Add User'}
             </button>
+            {message && <p>{message}</p>} {/* Display the message */}
           </div>
         </div>
         <div>
