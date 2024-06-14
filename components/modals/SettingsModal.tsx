@@ -1,4 +1,3 @@
-// @/components/modals/SettingsModal.tsx
 import React, { useState } from 'react';
 import styles from '@/styles/settingsModal.module.css';
 import { useSession } from 'next-auth/react';
@@ -11,8 +10,8 @@ interface SettingsModalProps {
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
-  const [message, setMessage] = useState<string>(''); // Ensure useState is properly defined
-  const [loading, setLoading] = useState<boolean>(false); // Ensure useState is properly defined
+  const [message, setMessage] = useState<string>(''); 
+  const [loading, setLoading] = useState<boolean>(false); 
 
   const addUserToMembers = async () => {
     setLoading(true);
@@ -27,7 +26,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen) return null; // Ensure the modal is only rendered when open
+  if (!isOpen) return null; 
 
   return (
     <div className={styles.modalOverlay}>
@@ -39,11 +38,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         <div>
           <label className={styles.Lable_title}>General Settings</label>
           <div>
-            {/* Add the button here */}
             <button onClick={addUserToMembers} disabled={loading}>
               {loading ? 'Adding...' : 'Add User'}
             </button>
-            {message && <p>{message}</p>} {/* Display the message */}
+            {message && <p>{message}</p>} 
           </div>
         </div>
         <div>
