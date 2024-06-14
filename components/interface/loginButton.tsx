@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import styles from '@/styles/navbar.module.css';
 import SettingsModal from '@/components/modals/SettingsModal';
+import axios from 'axios';
 
 const LoginButton = () => {
   const { data: session } = useSession();
@@ -13,6 +14,7 @@ const LoginButton = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation('common');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -32,6 +34,21 @@ const LoginButton = () => {
       setDropdownOpen(false);
     }
   };
+  useEffect(() => {
+    const checkUserInStaff = async () => {
+      if (session && session.user) {
+        try {
+          const response = await axios.get('/api/check-member', {
+            params: { userID: session.user.id },
+          });
+          setIsButtonDisabled(response.data.userExists);
+        } catch (error) {
+          console.error('Error checking membership status:', error);
+        }
+      }
+    };
+    checkUserInStaff();
+  }, [session]);
 
   // Attach/detach event listeners for closing dropdown
   useEffect(() => {
@@ -60,7 +77,7 @@ const LoginButton = () => {
           </li>
           <li className={styles.userMenuItem}>
             <div>
-              <button type="button" onClick={openModal} className={styles.userMenuButton}>
+              <button type="button" onClick={openModal} className={styles.userMenuButton} >
                 <span className={styles.userMenuIcon}>
                   <Image draggable="false" src="/assets/images/settings.png" height={20} width={20} alt="settings" />
                 </span>

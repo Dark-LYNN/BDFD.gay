@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import styles from '@/styles/settingsModal.module.css';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -12,7 +12,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
   const [message, setMessage] = useState<string>(''); 
   const [loading, setLoading] = useState<boolean>(false); 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  
   const addUserToMembers = async () => {
     setLoading(true);
     try {
@@ -26,6 +28,22 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
+  useEffect(() => {
+    const checkUserInStaff = async () => {
+      if (session && session.user) {
+        try {
+          const response = await axios.get('/api/check-member', {
+            params: { userID: session.user.id },
+          });
+          setIsButtonDisabled(response.data.userExists);
+        } catch (error) {
+          console.error('Error checking membership status:', error);
+        }
+      }
+    };
+    checkUserInStaff();
+  }, [session]);
+
   if (!isOpen) return null; 
 
   return (
@@ -38,8 +56,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         <div>
           <label className={styles.Lable_title}>General Settings</label>
           <div>
-            <button onClick={addUserToMembers} disabled={loading}>
-              {loading ? 'Adding...' : 'Add User'}
+            <button onClick={addUserToMembers} disabled={isButtonDisabled}>
+              {loading ? 'Adding...' : 'Get Added'}
             </button>
             {message && <p>{message}</p>} 
           </div>

@@ -1,37 +1,28 @@
-import { getSession } from 'next-auth/react';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import staffData from '@/data/Members.json';
-
-interface Member {
-    userID: number;
-    name: string;
-    username: string;
-    image: string;
-}
-  
-interface StaffData {
-    developer: Member[];
-    communityManager: Member[];
-    member: Member[];
-}
+import { NextApiRequest, NextApiResponse } from 'next';
+import fs from 'fs';
+import path from 'path';
+import { Member, Staff } from '@/types/index';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    const session = await getSession({ req });
-  
-    if (!session || !session.user) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
-  
-    const userID = session.user.id as unknown as number;
-    const staff = staffData as unknown as StaffData;
-  
-    const isStaff = Object.values(staff).some((group: Member[]) => {
-        if (Array.isArray(group)) {
-          return group.some((member: Member) => member.userID === userID);
-        }
-        return false;
-      });  
-    res.status(200).json({ isStaff });
+  const { userID } = req.query;
+
+  if (!userID) {
+    return res.status(400).json({ message: 'Missing userID' });
+  }
+
+  const filePath = path.resolve(process.cwd(), 'data/staffmembers.json');
+  const jsonData = fs.readFileSync(filePath, 'utf8');
+  const staff: Staff = JSON.parse(jsonData)[0];
+
+  const isUserInStaffData = (userID: number): boolean => {
+    return staff.developer.some((member: Member) => member.userID === userID) ||
+           staff.communityManager.some((member: Member) => member.userID === userID) ||
+           staff.member.some((member: Member) => member.userID === userID);
   };
-  
-  export default handler;
+
+  const userExists = isUserInStaffData(Number(userID));
+
+  return res.status(200).json({ userExists });
+};
+
+export default handler;
