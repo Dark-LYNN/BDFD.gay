@@ -13,6 +13,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const [message, setMessage] = useState<string>(''); 
   const [loading, setLoading] = useState<boolean>(false); 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isVerifyDisabled, setIsVerifyDisabled] = useState(false);
 
   
   const addUserToMembers = async () => {
@@ -42,10 +43,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
       }
     };
     checkUserInStaff();
+    
   }, [session]);
+  const verifyRole = () => {
+    window.location.href = '/api/auth/discord-custom';
+  };
 
   if (!isOpen) return null; 
-
+  
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -60,13 +65,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
               <button className={styles.addButton} onClick={addUserToMembers} disabled={isButtonDisabled || loading}>
                 {loading ? 'Adding...' : 'Get Added'}
               </button>
-              <button className={styles.verifyButton} disabled={isButtonDisabled || loading}>
+              {/*<button className={styles.verifyButton} onClick={verifyRole} disabled={false}>
                 {loading ? 'Verifying...' : 'Verify your role'}
-              </button>
+              </button>*/}
             </div>
             {message && <p>{message}</p>} 
           </div>
         </div>
+{/*
         <div>
           <label className={styles.Lable_title}>Language</label>
           <select className={styles.select}>
@@ -75,6 +81,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
             <option value="es">Spanish</option>
           </select>
         </div>
+*/}
       </div>
     </div>
   );

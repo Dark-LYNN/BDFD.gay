@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: 'Missing userID' });
   }
 
-  const filePath = path.resolve(process.cwd(), 'data/staffmembers.json');
+  const filePath = path.resolve(process.cwd(), 'data/Members.json');
   const jsonData = fs.readFileSync(filePath, 'utf8');
   const staff: Staff = JSON.parse(jsonData)[0];
 
