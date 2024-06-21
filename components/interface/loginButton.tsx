@@ -14,7 +14,6 @@ const LoginButton = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation('common');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -34,21 +33,7 @@ const LoginButton = () => {
       setDropdownOpen(false);
     }
   };
-  useEffect(() => {
-    const checkUserInStaff = async () => {
-      if (session && session.user) {
-        try {
-          const response = await axios.get('/api/check-member', {
-            params: { userID: session.user.id },
-          });
-          setIsButtonDisabled(response.data.userExists);
-        } catch (error) {
-          console.error('Error checking membership status:', error);
-        }
-      }
-    };
-    checkUserInStaff();
-  }, [session]);
+
 
   // Attach/detach event listeners for closing dropdown
   useEffect(() => {

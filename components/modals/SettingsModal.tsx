@@ -21,7 +21,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
       const response = await axios.post('/api/add-member');
       setMessage(response.data.message);
     } catch (error) {
-      setMessage('Error adding user to members');
+      setMessage('You are already added.');
       console.error('Error:', error);
     } finally {
       setLoading(false);
@@ -55,10 +55,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         <h2 className={styles.title}>Settings</h2>
         <div>
           <label className={styles.Lable_title}>General Settings</label>
-          <div>
-            <button onClick={addUserToMembers} disabled={isButtonDisabled}>
-              {loading ? 'Adding...' : 'Get Added'}
-            </button>
+          <div className={styles.addDiv}>
+            <div>
+              <button className={styles.addButton} onClick={addUserToMembers} disabled={isButtonDisabled || loading}>
+                {loading ? 'Adding...' : 'Get Added'}
+              </button>
+              <button className={styles.verifyButton} disabled={isButtonDisabled || loading}>
+                {loading ? 'Verifying...' : 'Verify your role'}
+              </button>
+            </div>
             {message && <p>{message}</p>} 
           </div>
         </div>

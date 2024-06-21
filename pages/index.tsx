@@ -3,7 +3,7 @@ import { GetStaticProps, GetStaticPropsContext } from 'next';
 import '@/public/assets/css/styles.css';
 import StaffMembers from '../components/interface/members';
 import staffData from '@/data/Members.json';
-import { Staff } from '@/types';
+import { Staff } from '@/types/index';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
