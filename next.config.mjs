@@ -2,6 +2,8 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -13,14 +15,6 @@ const nextConfig = {
         hostname: 'cdn.lynnux.xyz',
       },
     ],
-  },
-  webpack: (config) => {
-    // Support for YAML files
-    config.module.rules.push({
-      test: /\.ya?ml$/,
-      use: 'yaml-loader',
-    });
-    return config;
   },
 };
 
