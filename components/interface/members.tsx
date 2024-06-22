@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import StaffMemberslist from '@/data/Members.json';
-
+import Img from 'next/image';
 const defaultStaff: Staff = {
     developer: [],
     communityManager: [],
@@ -67,7 +67,8 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.developer.map((dev) => (
                         <Link href={`./profile/${dev.username}`} className={styles.userFrame} key={dev.userID}> {/* Key should be here */}
                             <div className={styles.member}>
-                            <img src={dev.image} alt={dev.name} className={styles.avatar} />                                <div className={styles.info}>
+                                <Img src={dev.image} alt={dev.name} className={styles.avatar} width={100} height={100}/>
+                                <div className={styles.info}>
                                     <p className={styles.name}>{dev.name}</p>
                                     <p className={styles.username}>@{dev.username}</p>
                                 </div>
@@ -82,7 +83,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.communityManager.map((cm) => (
                         <Link href={`./profile/${cm.username}`} className={styles.userFrame} key={cm.userID}> {/* Key should be here */}
                             <div className={styles.member}>
-                                <img src={cm.image} alt={cm.name} className={styles.avatar} />
+                                <Img src={cm.image} alt={cm.name} className={styles.avatar} width={100} height={100}/>
                                 <div className={styles.info}>
                                     <p className={styles.name}>{cm.name}</p>
                                     <p className={styles.username}>@{cm.username}</p>
@@ -98,7 +99,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.toaster.map((user) => (
                         <Link href={`./profile/${user.username}`} className={styles.userFrame} key={user.userID}>
                             <div className={styles.member}>
-                                <img src={user.image} alt={user.name} className={styles.avatar} />
+                                <Img src={user.image} alt={user.name} className={styles.avatar} width={100} height={100}/>
                                 <div className={styles.info}>
                                     <p className={styles.name}>{user.name}</p>
                                     <p className={styles.username}>@{user.username}</p>
@@ -114,7 +115,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.moderator.map((mod) => (
                         <Link href={`./profile/${mod.username}`} className={styles.userFrame} key={mod.userID}> {/* Key should be here */}
                             <div className={styles.member}>
-                                <img src={mod.image} alt={mod.name} className={styles.avatar} />
+                                <Img src={mod.image} alt={mod.name} className={styles.avatar} width={100} height={100}/>
                                 <div className={styles.info}>
                                     <p className={styles.name}>{mod.name}</p>
                                     <p className={styles.username}>@{mod.username}</p>
@@ -130,7 +131,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.support.map((support) => (
                         <Link href={`./profile/${support.username}`} className={styles.userFrame} key={support.userID}> {/* Key should be here */}
                             <div className={styles.member}>
-                                <img src={support.image} alt={support.name} className={styles.avatar} />
+                                <Img src={support.image} alt={support.name} className={styles.avatar} width={100} height={100}/>
                                 <div className={styles.info}>
                                     <p className={styles.name}>{support.name}</p>
                                     <p className={styles.username}>@{support.username}</p>
@@ -146,7 +147,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                     {staff.member.map((member) => (
                         <Link href={`./profile/${member.username}`} className={styles.userFrame} key={member.userID}>
                             <div className={styles.member}>
-                                <img src={member.image} alt={member.name} className={styles.avatar} />
+                                <Img src={member.image} alt={member.name} className={styles.avatar} width={100} height={100}/>
                                 <div className={styles.info}>
                                     <p className={styles.name}>{member.name}</p>
                                     <p className={styles.username}>@{member.username}</p>

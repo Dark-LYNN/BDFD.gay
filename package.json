@@ -1,7 +1,8 @@
 {
-  "name": "src",
-  "version": "0.1.0",
+  "name": "bdfdgay",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,6 +13,7 @@
     "axios": "^1.7.2",
     "i18next": "^23.11.5",
     "js-yaml": "^4.1.0",
+    "lint": "^0.8.19",
     "next": "14.2.4",
     "next-auth": "^4.24.7",
     "next-i18next": "^15.3.0",
