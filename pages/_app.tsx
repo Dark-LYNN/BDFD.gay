@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import Navbar from '@/components/layout/navbar';
+import '@/public/assets/css/styles.css';
 
 import '@/public/assets/css/styles.css';
 
