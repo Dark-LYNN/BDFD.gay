@@ -2,9 +2,6 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -17,6 +14,20 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    // Support for YAML files
+    config.module.rules.push({
+      test: /\.ya?ml$/,
+      use: 'yaml-loader',
+    });
+    return config;
+  },
+  i18n: {
+    locales: ['en-US', 'nl-NL', 'tr-TR'],
+    defaultLocale: 'en-US',
+    localeDetection: false,
+  },
+
 };
 
 export default nextConfig;

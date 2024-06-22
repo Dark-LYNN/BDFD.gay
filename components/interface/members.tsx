@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Member, Staff } from '@/types';
 import styles from '@/styles/members.module.css';
 import Link from 'next/link';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 import StaffMemberslist from '@/data/Members.json';
 import Img from 'next/image';
 const defaultStaff: Staff = {
@@ -20,6 +22,7 @@ interface StaffMembersProps {
   
 
 const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
+    const { t } = useTranslation('common');
 
     const [validatedStaff, setValidatedStaff] = useState<Staff>(defaultStaff);
 
@@ -59,7 +62,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
     return (
         <div className={styles.container}>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Developers'}</h3>
+                <h3 className={styles.roleName}>{t('Developers')}</h3>
                 <div className={styles.members}>
                     {staff.developer.map((dev) => (
                         <Link href={`./profile/${dev.username}`} className={styles.userFrame} key={dev.userID}> {/* Key should be here */}
@@ -75,7 +78,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Community Manager'}</h3>
+                <h3 className={styles.roleName}>{t('Community Manager')}</h3>
                 <div className={styles.members}>
                     {staff.communityManager.map((cm) => (
                         <Link href={`./profile/${cm.username}`} className={styles.userFrame} key={cm.userID}> {/* Key should be here */}
@@ -91,7 +94,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Toaster'}</h3>
+                <h3 className={styles.roleName}>{t('Toaster')}</h3>
                 <div className={styles.members}>
                     {staff.toaster.map((user) => (
                         <Link href={`./profile/${user.username}`} className={styles.userFrame} key={user.userID}>
@@ -107,7 +110,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Moderator'}</h3>
+                <h3 className={styles.roleName}>{t('Moderator')}</h3>
                 <div className={styles.members}>
                     {staff.moderator.map((mod) => (
                         <Link href={`./profile/${mod.username}`} className={styles.userFrame} key={mod.userID}> {/* Key should be here */}
@@ -123,7 +126,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Support'}</h3>
+                <h3 className={styles.roleName}>{t('Support')}</h3>
                 <div className={styles.members}>
                     {staff.support.map((support) => (
                         <Link href={`./profile/${support.username}`} className={styles.userFrame} key={support.userID}> {/* Key should be here */}
@@ -139,7 +142,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h3 className={styles.roleName}>{'Members'}</h3>
+                <h3 className={styles.roleName}>{t('Members')}</h3>
                 <div className={styles.members}>
                     {staff.member.map((member) => (
                         <Link href={`./profile/${member.username}`} className={styles.userFrame} key={member.userID}>

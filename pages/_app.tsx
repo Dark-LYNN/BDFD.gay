@@ -7,8 +7,6 @@ import { SessionProvider } from 'next-auth/react';
 import Navbar from '@/components/layout/navbar';
 import '@/public/assets/css/styles.css';
 
-import '@/public/assets/css/styles.css';
-
 function MyApp({ Component, pageProps }: AppProps) {
   const isExcludedPage = Component.name === 'Custom404';
 
