@@ -1,5 +1,6 @@
 // @/pages/_app.tsx
 import Footer from '@/components/layout/footer';
+import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
@@ -61,4 +62,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

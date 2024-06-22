@@ -1,4 +1,4 @@
-// next.config.mjs
+import { i18n } from './next-i18next.config.mjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,19 +16,13 @@ const nextConfig = {
     ],
   },
   webpack: (config) => {
-    // Support for YAML files
     config.module.rules.push({
       test: /\.ya?ml$/,
       use: 'yaml-loader',
     });
     return config;
   },
-  i18n: {
-    locales: ['en-US', 'nl-NL', 'tr-TR'],
-    defaultLocale: 'en-US',
-    localeDetection: false,
-  },
-
+  i18n,
 };
 
 export default nextConfig;
