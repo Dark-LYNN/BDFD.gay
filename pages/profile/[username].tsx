@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next';
 import path from 'path';
 import { promises as fs } from 'fs';
 import styles from '@/styles/profile.module.css'
@@ -17,10 +17,11 @@ interface User {
 interface ProfileProps {
     user: User | null;
 }
+
 const gays = ["gay","very gay","like realy realy gay", "kinda gay","super duper gaylike it isn't even normal how gay he is","HELLA gay", "gay"];
 
 const Profile = ({ user }: ProfileProps) => {
-    const [imageUrl, setImageUrl] = React.useState<string>('/assets/images/default-avatar.png');
+    const [imageUrl, setImageUrl] = useState<string>('/assets/images/default-avatar.png');
     const [randomWord, setRandomWord] = useState<string>('');
 
     useEffect(() => {
@@ -72,13 +73,12 @@ const Profile = ({ user }: ProfileProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
     const { username } = context.params!;
-    
     const jsonDirectory = path.join(process.cwd(), 'data');
     const fileContents = await fs.readFile(jsonDirectory + '/Members.json', 'utf8');
     const members = JSON.parse(fileContents)[0];
-  
+
     let user: User | null = null;
     for (const role in members) {
         const foundUser = members[role].find((member: User) => member.username === username);
@@ -87,12 +87,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             break;
         }
     }
-  
+
     return {
         props: {
             user,
         },
+        revalidate: 10, // Revalidate at most once every 10 seconds
     };
 };
-  
-  export default Profile;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const jsonDirectory = path.join(process.cwd(), 'data');
+    const fileContents = await fs.readFile(jsonDirectory + '/Members.json', 'utf8');
+    const members = JSON.parse(fileContents)[0];
+
+    const paths = [];
+    for (const role in members) {
+        for (const member of members[role]) {
+            paths.push({
+                params: {
+                    username: member.username,
+                },
+            });
+        }
+    }
+
+    return {
+        paths,
+        fallback: 'blocking', // or 'true' or 'false'
+    };
+};
+
+export default Profile;

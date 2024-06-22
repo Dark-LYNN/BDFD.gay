@@ -1,6 +1,5 @@
 // @/pages/_app.tsx
 import Footer from '@/components/layout/footer';
-
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
