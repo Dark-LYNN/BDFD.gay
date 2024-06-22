@@ -3,7 +3,7 @@
   publish = "out"
 
 [build.environment]
-  NODE_VERSION = "14"
+  NODE_VERSION = "22.3.0"
 
 [build.lifecycle]
   onBuildCommand = "npm install"
