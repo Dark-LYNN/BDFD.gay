@@ -67,7 +67,6 @@ const handleVerifyRole = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const userInfo = userInfoResponse.data;
 
-    // File path for staffmembers.json
     const filePath = path.resolve('./data', 'Members.json');
     
     // Ensure the file exists

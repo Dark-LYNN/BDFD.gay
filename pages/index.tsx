@@ -18,6 +18,8 @@ const parseMembers = (data: any): Staff => {
   return {
     developer: data.developer.map(parseMember),
     communityManager: data.communityManager.map(parseMember),
+    toaster: data.toaster.map(parseMember),
+    moderator: data.moderator.map(parseMember),
     member: data.member.map(parseMember),
   };
 };

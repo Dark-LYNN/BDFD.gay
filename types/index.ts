@@ -9,6 +9,7 @@ export interface Member {
 export interface Staff {
     developer: Member[];
     communityManager: Member[];
+    toaster: Member[];  // Ensure toaster is included
+    moderator: Member[];
     member: Member[];
-}
-  
+  }

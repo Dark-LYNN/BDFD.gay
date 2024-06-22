@@ -7,8 +7,8 @@ const DISCORD_API_URL = 'https://discord.com/api/v10';
 const GUILD_ID = '566363823137882154';
 const ROLE_PRIORITY = {
   developer: '566622558158454802',
-  toaster: '820397594429095966',
   communityManager: '567473943452057611',
+  toaster: '820397594429095966',
   moderators: '566364651986747392',
   member: '', // Added to ensure member is part of the RoleCategory
 };
