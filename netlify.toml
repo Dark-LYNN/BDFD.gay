@@ -1,12 +1,9 @@
 [build]
-  command = "npm run build && npm run export"
+  command = "npm run build"
   publish = "out"
-  
+
 [build.environment]
   NODE_VERSION = "22"
-
-[build.lifecycle]
-  onBuildCommand = "npm install"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
