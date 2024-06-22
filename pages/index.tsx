@@ -4,9 +4,12 @@ import '@/public/assets/css/styles.css';
 import StaffMembers from '../components/interface/members';
 import staffData from '@/data/Members.json';
 import { Staff, Member } from '@/types/index';
+import { validateStaffImages } from './api/validateImages';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
+import fs from 'fs';
+import path from 'path';
 
 // Function to ensure userID is a number
 const parseMembers = (data: any): Staff => {
@@ -36,8 +39,13 @@ const Home = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const filePath = path.resolve(process.cwd(), 'data/Members.json');
+  const jsonData = fs.readFileSync(filePath, 'utf8');
+  let staff: Staff = JSON.parse(jsonData)[0];
+  staff = await validateStaffImages(staff);
   return {
     props: {
+      staff,
       ...(await serverSideTranslations(locale as string, ['common'])),
     },
   };
