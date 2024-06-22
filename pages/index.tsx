@@ -5,8 +5,6 @@ import staffData from '@/data/Members.json';
 import { Staff, Member } from '@/types/index';
 import { validateStaffImages } from './api/validateImages';
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'react-i18next';
 import fs from 'fs';
 import path from 'path';
 
@@ -28,7 +26,6 @@ const parseMembers = (data: any): Staff => {
 };
 
 const Home = () => {
-  const { t } = useTranslation('common');
   const staff: Staff = parseMembers(staffData[0]);
   
   return (
@@ -46,7 +43,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       staff,
-      ...(await serverSideTranslations(locale as string, ['common'])),
     },
   };
 };

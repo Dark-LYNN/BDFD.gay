@@ -22,12 +22,6 @@ const nextConfig = {
     });
     return config;
   },
-  i18n: {
-    locales: ['en-US', 'nl-NL', 'tr-TR'],
-    defaultLocale: 'en-US',
-    localeDetection: false,
-  },
-
 };
 
 export default nextConfig;
