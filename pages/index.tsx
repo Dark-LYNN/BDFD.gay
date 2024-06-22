@@ -1,6 +1,5 @@
 // @/pages/index.tsx
 import { GetStaticProps, GetStaticPropsContext } from 'next';
-import '@/public/assets/css/styles.css';
 import StaffMembers from '../components/interface/members';
 import staffData from '@/data/Members.json';
 import { Staff, Member } from '@/types/index';
