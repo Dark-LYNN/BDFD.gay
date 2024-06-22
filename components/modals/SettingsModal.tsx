@@ -29,28 +29,26 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  useEffect(() => {
-    const checkUserInStaff = async () => {
-      if (session && session.user) {
-        try {
-          const response = await axios.get('/api/check-member', {
-            params: { userID: session.user.id },
-          });
-          setIsButtonDisabled(response.data.userExists);
-        } catch (error) {
-          console.error('Error checking membership status:', error);
-        }
-      }
-    };
-    checkUserInStaff();
-    
-  }, [session]);
-  const verifyRole = () => {
-    window.location.href = '/api/auth/discord-custom';
+  const removeUser = async () => {
+    if (!session || !session.user) {
+      setMessage('User session not found');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/remove-user', { userId: session.user.id });
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage('Error removing user');
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null; 
-  
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -65,7 +63,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
               <button className={styles.addButton} onClick={addUserToMembers} disabled={isButtonDisabled || loading}>
                 {loading ? 'Adding...' : 'Get Added'}
               </button>
-              {/*<button className={styles.verifyButton} onClick={verifyRole} disabled={false}>
+              <button className={styles.removeButton} onClick={removeUser} disabled={loading}>
+                {loading ? 'Removing...' : 'Remove User'}
+              </button>              {/*<button className={styles.verifyButton} onClick={verifyRole} disabled={false}>
                 {loading ? 'Verifying...' : 'Verify your role'}
               </button>*/}
             </div>

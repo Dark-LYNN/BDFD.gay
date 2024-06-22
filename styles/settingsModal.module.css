@@ -79,7 +79,7 @@
     font-weight: bolder;
 }
 
-.verifyButton {
+.removeButton {
     background-color: #a0a0a0;
     color: white;
     border: none;
@@ -91,7 +91,7 @@
     right: 1px;
 }
 
-.verifyButton:hover {
+.removeButton:hover {
     background-color: #414141;
     font-weight: bolder;
 }
