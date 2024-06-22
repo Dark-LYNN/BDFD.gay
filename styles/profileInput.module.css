@@ -1,0 +1,37 @@
+.inputFrame {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+.input {
+    background-color: #C7C7C7;
+    border-radius: 35px;
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 16px;
+}
+  
+.button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #999999;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-color: #646464;
+}
+
+.label {
+    color: var(--black-color);
+    font-size: larger;
+    font-weight: 500;
+    padding-bottom: 1px;
+
+}

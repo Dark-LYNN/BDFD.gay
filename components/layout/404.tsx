@@ -14,7 +14,7 @@ const Custom404 = () => {
                 <div className={styles.container}>
                     <Img style={PaddingBottom} width="500" height="500" src="/assets/images/svg/NotFound.svg" alt="not-found" className={styles.img} />
 
-                    <h4 className={styles.h1} style={{ backgroundColor: 'transparent', paddingBottom: '1rem' }}>The page you're looking for can't be found."</h4>
+                    <h4 className={styles.h1} style={{ backgroundColor: 'transparent', paddingBottom: '1rem' }}>The page you&apos;re looking for can&apos;t be found.</h4>
                     <Link className={styles.button} href="/">Home</Link>
                 </div>
             </div>

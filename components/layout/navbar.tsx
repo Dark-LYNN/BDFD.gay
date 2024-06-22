@@ -44,6 +44,14 @@ const Navbar = () => {
     return (
     <>
         <nav className={styles.navbar}>
+            <div>
+                <Link href="/">
+                    <div className={styles.logo}>
+                        <Image src={"/assets/favicon.png"} alt='BDFD.gay' width={50} height={50}></Image>
+                        <p className={styles.rainbowText}>BDFD.gay</p>
+                    </div>
+                </Link>
+            </div>
             <div className={`${styles.navbar__side} ${styles.navbar__user}`}>
                 <span aria-label={styles.language} data-text={styles.language} className={`${styles.tooltip} ${styles.is_bottom}`}>
                 </span>

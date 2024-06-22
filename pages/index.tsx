@@ -23,6 +23,7 @@ const parseMembers = (data: any): Staff => {
     communityManager: data.communityManager.map(parseMember),
     toaster: data.toaster.map(parseMember),
     moderator: data.moderator.map(parseMember),
+    support: data.support.map(parseMember),
     member: data.member.map(parseMember),
   };
 };

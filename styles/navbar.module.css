@@ -4,7 +4,7 @@
     background: #1A1A1A;
     display: grid;
     grid-auto-flow: column;
-    height: 64px;
+    height: 80px;
     position: sticky;
     top: 0;
     transition: background-color .2s ease-out;
@@ -59,7 +59,7 @@
 .navbar__link {
     align-items: center;
     display: flex;
-    font-width: 600 !important;
+    font-weight: 600;
     font-size: 18px;
     height: 100%;
     opacity: 1;
@@ -470,4 +470,29 @@ img.emoji {
 
 .pl_35 {
     padding-left: 35px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px 0 0px 5vh;
+}
+
+.rainbowText {
+    padding-left: 1vh;
+    font-size: larger;
+    font-weight: bolder;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, indigo, blue, green, yellow, orange);
+    background-size: 2000% 2000%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbow 30s linear infinite;
+
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }

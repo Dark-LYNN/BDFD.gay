@@ -55,6 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     name: displayName,
     username: userName,
     image: userImage,
+    profile: ''
   };
 
   staff.member.push(newMember);

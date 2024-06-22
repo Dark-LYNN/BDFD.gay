@@ -12,6 +12,7 @@ const defaultStaff: Staff = {
     communityManager: [],
     toaster: [],
     moderator: [],
+    support: [],
     member: [],
 };
 
@@ -57,14 +58,14 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
 
         validateStaff(staff);
     }, [staff]);
-    
+
     return (
         <div className={styles.container}>
             <div className={styles.section}>
                 <h3 className={styles.roleName}>{t('Developers')}</h3>
                 <div className={styles.members}>
                     {staff.developer.map((dev) => (
-                        <Link href={`./profile/${dev.name}`} className={styles.userFrame} key={dev.userID}> {/* Key should be here */}
+                        <Link href={`./profile/${dev.username}`} className={styles.userFrame} key={dev.userID}> {/* Key should be here */}
                             <div className={styles.member}>
                             <img src={dev.image} alt={dev.name} className={styles.avatar} />                                <div className={styles.info}>
                                     <p className={styles.name}>{dev.name}</p>
@@ -79,7 +80,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 <h3 className={styles.roleName}>{t('Community Manager')}</h3>
                 <div className={styles.members}>
                     {staff.communityManager.map((cm) => (
-                        <Link href={`./profile/${cm.name}`} className={styles.userFrame} key={cm.userID}> {/* Key should be here */}
+                        <Link href={`./profile/${cm.username}`} className={styles.userFrame} key={cm.userID}> {/* Key should be here */}
                             <div className={styles.member}>
                                 <img src={cm.image} alt={cm.name} className={styles.avatar} />
                                 <div className={styles.info}>
@@ -94,8 +95,8 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
             <div className={styles.section}>
                 <h3 className={styles.roleName}>{t('Toaster')}</h3>
                 <div className={styles.members}>
-                    {staff.communityManager.map((user) => (
-                        <Link href={`./profile/${user.name}`} className={styles.userFrame} key={user.userID}>
+                    {staff.toaster.map((user) => (
+                        <Link href={`./profile/${user.username}`} className={styles.userFrame} key={user.userID}>
                             <div className={styles.member}>
                                 <img src={user.image} alt={user.name} className={styles.avatar} />
                                 <div className={styles.info}>
@@ -110,13 +111,29 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
             <div className={styles.section}>
                 <h3 className={styles.roleName}>{t('Moderator')}</h3>
                 <div className={styles.members}>
-                    {staff.moderator.map((user) => (
-                        <Link href={`./profile/${user.name}`} className={styles.userFrame} key={user.userID}> {/* Key should be here */}
+                    {staff.moderator.map((mod) => (
+                        <Link href={`./profile/${mod.username}`} className={styles.userFrame} key={mod.userID}> {/* Key should be here */}
                             <div className={styles.member}>
-                                <img src={user.image} alt={user.name} className={styles.avatar} />
+                                <img src={mod.image} alt={mod.name} className={styles.avatar} />
                                 <div className={styles.info}>
-                                    <p className={styles.name}>{user.name}</p>
-                                    <p className={styles.username}>@{user.username}</p>
+                                    <p className={styles.name}>{mod.name}</p>
+                                    <p className={styles.username}>@{mod.username}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+            <div className={styles.section}>
+                <h3 className={styles.roleName}>{t('Support')}</h3>
+                <div className={styles.members}>
+                    {staff.support.map((support) => (
+                        <Link href={`./profile/${support.username}`} className={styles.userFrame} key={support.userID}> {/* Key should be here */}
+                            <div className={styles.member}>
+                                <img src={support.image} alt={support.name} className={styles.avatar} />
+                                <div className={styles.info}>
+                                    <p className={styles.name}>{support.name}</p>
+                                    <p className={styles.username}>@{support.username}</p>
                                 </div>
                             </div>
                         </Link>
@@ -127,7 +144,7 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
                 <h3 className={styles.roleName}>{t('Members')}</h3>
                 <div className={styles.members}>
                     {staff.member.map((member) => (
-                        <Link href={`./profile/${member.name}`} className={styles.userFrame} key={member.userID}>
+                        <Link href={`./profile/${member.username}`} className={styles.userFrame} key={member.userID}>
                             <div className={styles.member}>
                                 <img src={member.image} alt={member.name} className={styles.avatar} />
                                 <div className={styles.info}>

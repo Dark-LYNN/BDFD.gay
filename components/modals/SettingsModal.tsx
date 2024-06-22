@@ -2,11 +2,14 @@ import styles from '@/styles/settingsModal.module.css';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import ProfileInput from '@/components/interface/profileInput';
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const blockedUserIds = ["123456789", "987654321"];
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
@@ -14,9 +17,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState<boolean>(false); 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isVerifyDisabled, setIsVerifyDisabled] = useState(false);
-
   
   const addUserToMembers = async () => {
+    const userId = session?.user?.id;
+    if (blockedUserIds.includes(`${userId}`)) {
+      setMessage('You are not allowed to be added.');
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.post('/api/add-member');
@@ -29,6 +37,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+  if (status === 'unauthenticated') {
+    return <p>You need to be authenticated to view this page.</p>;
+  }
+  const userId = session?.user?.id;
+  
   const removeUser = async () => {
     if (!session || !session.user) {
       setMessage('User session not found');
@@ -65,11 +82,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
               </button>
               <button className={styles.removeButton} onClick={removeUser} disabled={loading}>
                 {loading ? 'Removing...' : 'Remove User'}
-              </button>              {/*<button className={styles.verifyButton} onClick={verifyRole} disabled={false}>
+              </button>              
+              {/*<button className={styles.verifyButton} onClick={verifyRole} disabled={false}>
                 {loading ? 'Verifying...' : 'Verify your role'}
               </button>*/}
             </div>
-            {message && <p>{message}</p>} 
+            {message && <p>{message}</p>}
+            <br/>
+            <ProfileInput userId={`${userId}`} />
           </div>
         </div>
 {/*

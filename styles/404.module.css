@@ -35,3 +35,17 @@
 .transfer {
     transform: translatex(12%);
 }
+.nw_title {
+    color: aliceblue;
+    font-size:larger;
+    font-weight: bold;
+}
+.nw_description {
+    color: aliceblue;
+    font-size: smaller;
+    font-weight: 500;
+}
+.nw_div{
+    color: #BBBBBB;
+    font-size: smaller;
+}

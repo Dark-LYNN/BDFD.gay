@@ -4,6 +4,7 @@ export interface Member {
     name: string;
     username: string;
     image: string;
+    profile: string;
 }
   
 export interface Staff {
@@ -11,5 +12,6 @@ export interface Staff {
     communityManager: Member[];
     toaster: Member[];  // Ensure toaster is included
     moderator: Member[];
+    support: Member[];
     member: Member[];
   }
