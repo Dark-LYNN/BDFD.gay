@@ -25,39 +25,39 @@ const StaffMembers: React.FC<StaffMembersProps> = ({ staff }) => {
 
     const [validatedStaff, setValidatedStaff] = useState<Staff>(defaultStaff);
 
-  useEffect(() => {
-    const preloadImage = (url: string) => {
-      return new Promise<boolean>((resolve) => {
-        const img = new Image();
-        img.src = url;
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-      });
-    };
+    useEffect(() => {
+        const preloadImage = (url: string) => {
+            return new Promise<boolean>((resolve) => {
+                const img = new Image();
+                img.src = url;
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+            });
+        };
 
-    const validateImages = async (members: Member[]) => {
-      for (const member of members) {
-        const isValid = await preloadImage(member.image);
-        if (!isValid) {
-          member.image = '/assets/images/default-avatar.png';
-        }
-      }
-    };
+        const validateImages = async (members: Member[]) => {
+            for (const member of members) {
+                const isValid = await preloadImage(member.image);
+                if (!isValid) {
+                    member.image = '/assets/images/default-avatar.png';
+                }
+            }
+        };
 
-    const validateStaff = async (staff: Staff) => {
-      await Promise.all([
-        validateImages(staff.developer),
-        validateImages(staff.communityManager),
-        validateImages(staff.toaster),
-        validateImages(staff.moderator),
-        validateImages(staff.member),
-      ]);
-      setValidatedStaff(staff);
-    };
+        const validateStaff = async (staff: Staff) => {
+            await Promise.all([
+                validateImages(staff.developer),
+                validateImages(staff.communityManager),
+                validateImages(staff.toaster),
+                validateImages(staff.moderator),
+                validateImages(staff.member),
+            ]);
+            setValidatedStaff(staff);
+        };
 
-    validateStaff(staff);
-  }, [staff]);
-      console.log('Staff object:', staff);
+        validateStaff(staff);
+    }, [staff]);
+    
     return (
         <div className={styles.container}>
             <div className={styles.section}>

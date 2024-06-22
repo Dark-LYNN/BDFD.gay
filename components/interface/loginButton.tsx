@@ -6,9 +6,12 @@ import Image from 'next/image';
 import styles from '@/styles/navbar.module.css';
 import SettingsModal from '@/components/modals/SettingsModal';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import { Url } from 'next/dist/shared/lib/router/router';
 
 const LoginButton = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -34,6 +37,11 @@ const LoginButton = () => {
     }
   };
 
+  const handleClick = () => {
+    if (session?.user?.name) {
+      router.push(`/profile/${session.user.name}`);
+    }
+  };
 
   // Attach/detach event listeners for closing dropdown
   useEffect(() => {
@@ -53,7 +61,7 @@ const LoginButton = () => {
       <div className={styles.userMenuDropdown} id="user-popup">
         <ul className={styles.userMenuList}>
           <li className={styles.userMenuItem}>
-            <button type="button" className={styles.userMenuButton}>
+            <button onClick={handleClick} type="button" className={styles.userMenuButton}>
               <span className={styles.userMenuIcon}>
                 <Image draggable="false" src="/assets/images/member.png" height={20} width={20} alt="Profile Icon" />
               </span>

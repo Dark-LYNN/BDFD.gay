@@ -4,20 +4,8 @@ import fs from 'fs';
 import axios from 'axios';
 import path from 'path';
 import { Member, Staff } from '@/types/index';
+import fetchDisplayName from '@/utils/fetchDisplayName';
 
-const fetchDisplayName = async (userID: number, botToken: string) => {
-  try {
-    const response = await axios.get('https://discord.com/api/v10/users/' + userID, {
-      headers: {
-        Authorization: `Bot ${botToken}`,
-      },
-    });
-    return response.data.username;
-  } catch (error) {
-    console.error('Error fetching display name:', error);
-    throw new Error('Failed to fetch display name from Discord');
-  }
-};
 
 const isUserInStaffData = (staff: Staff, userID: number): boolean => {
   return staff.developer.some(member => member.userID === userID) ||
@@ -40,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const userName = session.user.name as unknown as string;
   const userImage = session.user.image as unknown as string;
   const botToken = process.env.DISCORD_BOT_TOKEN;
+  const global_name = await fetchDisplayName(userID);
 
   if (!botToken) {
     return res.status(500).json({ message: 'Discord bot token is not configured' });
@@ -47,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let displayName: string;
   try {
-    displayName = await fetchDisplayName(userID, botToken);
+    displayName = await fetchDisplayName(userID);
   } catch (error) {
     return res.status(500).json({ message: 'Failed to fetch display name from Discord' });
   }
@@ -63,8 +52,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const newMember: Member = {
     userID,
-    name: userName,
-    username: displayName,
+    name: displayName,
+    username: userName,
     image: userImage,
   };
 

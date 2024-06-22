@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 import axios from 'axios';
 import { DiscordProfile } from '@/types/discordProfile';
+import fetchDisplayName from '@/utils/fetchDisplayName';
 
 const authHandler: NextApiHandler = NextAuth({
   providers: [
@@ -17,16 +18,18 @@ const authHandler: NextApiHandler = NextAuth({
     async signIn({ user, account, profile }) {
       if (account && profile && account.provider === 'discord') {
         const discordProfile = profile as DiscordProfile;
-        const userId = discordProfile.id;
+        const userId = Number(discordProfile.id);
         const imageUrl = discordProfile.avatar
           ? `https://cdn.discordapp.com/avatars/${userId}/${discordProfile.avatar}.png`
           : '/assets/images/default-avatar.png';
 
         try {
+          const global_name = await fetchDisplayName(userId);
+
           await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/update-user-image`, {
             userId,
-            name: user.name,
-            username: user.name, // or use profile.username if available
+            name: global_name,
+            username: user.name,
             imageUrl,
           });
         } catch (error) {
