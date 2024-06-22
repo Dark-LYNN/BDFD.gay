@@ -1,7 +1,6 @@
 // @/components/interface/loginButton.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import styles from '@/styles/navbar.module.css';
 import SettingsModal from '@/components/modals/SettingsModal';
@@ -16,7 +15,6 @@ const LoginButton = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation('common');
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -65,7 +63,7 @@ const LoginButton = () => {
               <span className={styles.userMenuIcon}>
                 <Image draggable="false" src="/assets/images/member.png" height={20} width={20} alt="Profile Icon" />
               </span>
-              <span className={styles.userMenuText}>{t('Profile')}</span>
+              <span className={styles.userMenuText}>{'Profile'}</span>
             </button>
           </li>
           <li className={styles.userMenuItem}>
@@ -74,7 +72,7 @@ const LoginButton = () => {
                 <span className={styles.userMenuIcon}>
                   <Image draggable="false" src="/assets/images/settings.png" height={20} width={20} alt="settings" />
                 </span>
-                <span onClick={openModal} className={styles.userMenuText}>{t('Settings')}</span>
+                <span onClick={openModal} className={styles.userMenuText}>{'Settings'}</span>
 
               </button>
               <SettingsModal isOpen={isModalOpen} onClose={closeModal} />
@@ -85,7 +83,7 @@ const LoginButton = () => {
               <span className={styles.userMenuIcon}>
                 <Image draggable="false" src="/assets/images/signout.png" height={20} width={20} alt="Sign Out Icon" />
               </span>
-              <span onClick={() => signOut()} className={styles.userMenuText}>{t('Sign Out')}</span>
+              <span onClick={() => signOut()} className={styles.userMenuText}>{'Sign Out'}</span>
             </button>
           </li>
         </ul>
@@ -112,7 +110,7 @@ const LoginButton = () => {
   }
 
   return (
-    <a onClick={() => signIn('discord')} className={styles.navbarButton}>{t('Login')}</a>
+    <a onClick={() => signIn('discord')} className={styles.navbarButton}>{'Login'}</a>
   );
 };
 
